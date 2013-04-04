@@ -67,16 +67,26 @@ mergeInto(LibraryManager.library, {
       // might create some side data structure for use later (like an Image element, etc.).
 
       function getMimetype(name) {
-        return {
+        var ret;
+
+        //filetypes with 3 chars
+        ret = {
           'jpg': 'image/jpeg',
-          'jpeg': 'image/jpeg',
           'png': 'image/png',
           'bmp': 'image/bmp',
           'ogg': 'audio/ogg',
           'wav': 'audio/wav',
           'mp3': 'audio/mpeg'
         }[name.substr(-3)];
-        return ret;
+
+        if(ret) return ret; 
+
+        //filetypes with 4 chars
+        ret = {
+          'jpeg': 'image/jpeg'
+        }[name.substr(-4)];
+
+        return ret; 
       }
 
       if (!Module["preloadPlugins"]) Module["preloadPlugins"] = [];
